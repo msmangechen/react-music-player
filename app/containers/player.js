@@ -105,11 +105,11 @@ class Player extends Component {
 					<div className="controll-wrapper">
 						{/* 标题 */}
 						<h2 className="music-title">
-							{this.props.cuerrentMusicItem.title}
+							{this.props.currentMusicItem.title}
 						</h2>
 						{/* 作者 */}
 						<h3 className="music-artist mt10">
-							{this.props.cuerrentMusicItem.artist}
+							{this.props.currentMusicItem.artist}
 						</h3>
 						<div className="row mt20">
 							{/* 音乐时长 */}
@@ -143,7 +143,7 @@ class Player extends Component {
 					</div>
 					{/* 封面信息 */}
 					<div className={`-col-auto cover ${this.state.isPlay ? 'rotation' : ''}`}>
-						<img src={this.props.cuerrentMusicItem.cover} alt={this.props.cuerrentMusicItem.title} />
+						<img src={this.props.currentMusicItem.cover} alt={this.props.currentMusicItem.title} />
 					</div>
 				</div>
 			</div>
