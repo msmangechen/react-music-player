@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './progress.scss';
 
+// 进度条组件
 class Progress extends Component {
+
 	constructor(props) {
 		super(props);
 		this.setProgress = this.setProgress.bind(this);
@@ -31,3 +33,5 @@ class Progress extends Component {
 		);
 	}
 }
+
+export default Progress;

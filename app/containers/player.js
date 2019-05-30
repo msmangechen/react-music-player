@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
+
+// 进度条组件
 import Progress from '../components/progress';
+
 import { Link } from 'react-router-dom';
-// subscriber mode
+
+// 订阅者模式
 import Pubsub from 'pubsub-js';
 import './player.scss';
 
-// total time of mp3
+// mp3 文件的总时长
 let musicDuration = null;
 
+// 播放器组件
 class Player extends Component {
 
-	// initialize
+	// 初始化参数
 	constructor(props) {
-		super(props);
+		super(props),
 
 		// 设置默认值
 		// isPlay - 自动播放
@@ -24,9 +29,9 @@ class Player extends Component {
 			leftTime: ''
 		}
 
-		// 函数绑定
+		// 函数绑定 this
 		this.setProgress = this.setProgress.bind(this);
-		this.setVolumn = this.setVolumn.bind(this);
+		this.setVolume = this.setVolume.bind(this);
 		this.play = this.play.bind(this);
 		this.prev = this.prev.bind(this);
 		this.next = this.next.bind(this);
@@ -35,8 +40,9 @@ class Player extends Component {
 
 	// 生命周期函数钩子
 	componentDidMount() {
-
+		
 		$('#player').bind($.jPlayer.event.timeupdate, (e) => {
+
 			// 得到 mp3 总时长（信息都储存在 e 当中）
 			musicDuration = e.jPlayer.status.duration;
 
@@ -46,7 +52,7 @@ class Player extends Component {
 			this.setState({
 				volume: e.jPlayer.options.volume * 100,
 				progress: e.jPlayer.status.currentPercentAbsolute,
-				leftTime: this.formatTime(musicDuration * (1 - e.jPlayer.status.currentPercentAbsolute / 100));
+				leftTime: this.formatTime(musicDuration * (1 - e.jPlayer.status.currentPercentAbsolute / 100))
 			});
 		});
 
@@ -58,10 +64,12 @@ class Player extends Component {
 		$('#player').jPlayer(this.state.isPlay ? 'play' : 'pause', musicDuration * pgs);
 	}
 
-	setVolumn(pgs) {
+	// 同上
+	setVolume(pgs) {
 		$('#player').jPlayer('volume', pgs);
 	}
 
+	// 播放/暂停
 	play() {
 		$('#player').jPlayer(this.state.isPlay ? 'pause' : 'play');
 		this.setState({ isPlay: !this.state.isPlay });
@@ -72,10 +80,12 @@ class Player extends Component {
 		Pubsub.publish('PREV_MUSIC');
 	}
 
+	// 同上（下一首）
 	next() {
 		Pubsub.publish('NEXT_MUSIC');
 	}
 
+	// 同上（改变播放模式，单曲循环等）
 	changeCycleModel() {
 		Pubsub.publish('CHANGE_CYCLE_MODEL');
 	}
@@ -105,11 +115,11 @@ class Player extends Component {
 					<div className="controll-wrapper">
 						{/* 标题 */}
 						<h2 className="music-title">
-							{this.props.currentMusicItem.title}
+							{this.props.cuerrentMusicItem.title}
 						</h2>
 						{/* 作者 */}
 						<h3 className="music-artist mt10">
-							{this.props.currentMusicItem.artist}
+							{this.props.cuerrentMusicItem.artist}
 						</h3>
 						<div className="row mt20">
 							{/* 音乐时长 */}
@@ -143,7 +153,7 @@ class Player extends Component {
 					</div>
 					{/* 封面信息 */}
 					<div className={`-col-auto cover ${this.state.isPlay ? 'rotation' : ''}`}>
-						<img src={this.props.currentMusicItem.cover} alt={this.props.currentMusicItem.title} />
+						<img src={this.props.cuerrentMusicItem.cover} alt={this.props.cuerrentMusicItem.title} />
 					</div>
 				</div>
 			</div>
