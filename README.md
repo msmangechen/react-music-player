@@ -1,7 +1,7 @@
 ### Introduction
-Used React to build `Music Player`，`SPA` to play music with two parts. There is one part of muisc playing, and the other is for list of managing musics.
-Used `react-hot` to update with `html-webpack-plugin` 
-Used `PubSubJS` instead of `Redux`, so we can use `Pubsub.subscribe()` to operate `action`
+- Used React to build `Music Player`，`SPA` to play music with two parts. There is one part of muisc playing, and the other is for list of managing musics.
+- Used `react-hot` to update with `html-webpack-plugin` 
+- Used `PubSubJS` instead of `Redux`, so we can use `Pubsub.subscribe()` to operate `action`
 
 ----
 
